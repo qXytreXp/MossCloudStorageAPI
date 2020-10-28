@@ -52,7 +52,6 @@ class AddDocumentView(APIView):
             model = Document(user=user)
             filename = file['document']
 
-
             type_file = str(filename).split(".")[-1] 
             model.type_file = type_file
             model.document.save(file['document'], file['document'])
@@ -84,7 +83,6 @@ class DeleteDocumentView(APIView):
         if data['token'] == '43880072':  
             user = User.objects.get(username=data['username'])
 
-            # remove file in data base
             model = Document.objects.get(document=f'{user.username}/' + data['document'])
             os.remove(settings.MEDIA_ROOT + '/' + str(model.document).replace('\\', '/'))
             model.delete()
