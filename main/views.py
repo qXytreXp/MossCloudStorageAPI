@@ -12,18 +12,6 @@ from django.views.generic import View
 import os
 
 
-class UserRegisterView(APIView):
-    def post(self, request):
-        data = request.data
-
-        user = authenticate(username=data['username'], password=data['password'])
-
-        if user == None:
-            return Response({'detail': 'User does not exists!'}, status=500)
-        
-        return Response({'detail': 'User does exists!'}, status=200)
-
-
 class DocumentListView(APIView):
     def post(self, request):
         data = request.data
