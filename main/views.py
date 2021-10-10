@@ -16,7 +16,7 @@ class DocumentListView(APIView):
     def post(self, request):
         data = request.data
 
-        if data['token'] == '43880072':  
+        if data['token'] == 'secret':  
             user = User.objects.get(username=data['username'])
 
             documents = Document.objects.filter(user=user.id).order_by('-id')
@@ -34,7 +34,7 @@ class AddDocumentView(APIView):
         data = request.data
         file = request.FILES
 
-        if data['token'] == '43880072':  
+        if data['token'] == 'secret':  
             user = User.objects.get(username=data['username'])
       
             model = Document(user=user)
@@ -51,7 +51,7 @@ class AddDocumentView(APIView):
 
 class DownloadDocView(View):
     def get(self, request, username, token, filename):  
-        if token == '43880072':  
+        if token == 'secret':  
             user = User.objects.get(username=username)
 
             path = f'{settings.MEDIA_ROOT}/{username}/{filename}'
@@ -68,7 +68,7 @@ class DeleteDocumentView(APIView):
     def post(self, request):
         data = request.data
 
-        if data['token'] == '43880072':  
+        if data['token'] == 'secret':  
             user = User.objects.get(username=data['username'])
 
             model = Document.objects.get(document=f'{user.username}/' + data['document'])
